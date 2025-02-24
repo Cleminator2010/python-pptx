@@ -1,0 +1,102 @@
+from pptx import Presentation
+from pptx.util import Inches, Pt
+from pptx.dml.color import RGBColor
+
+def create_fdp_presentation():
+    prs = Presentation()
+    
+    # FDP Farben
+    FDP_BLUE = RGBColor(0, 158, 227)  # #009ee3
+    FDP_YELLOW = RGBColor(255, 237, 0) # #ffed00
+
+    # Titelfolie
+    title_slide = prs.slides.add_slide(prs.slide_layouts[0])
+    title = title_slide.shapes.title
+    subtitle = title_slide.placeholders[1]
+    
+    title.text = "Die Freie Demokratische Partei (FDP)"
+    subtitle.text = "Liberale Politik für Deutschland"
+    
+    # Weitere Folien hinzufügen
+    def add_content_slide(title, bullet_points):
+        slide = prs.slides.add_slide(prs.slide_layouts[1])
+        slide.shapes.title.text = title
+        tf = slide.shapes.placeholders[1].text_frame
+        
+        for point in bullet_points:
+            p = tf.add_paragraph()
+            p.text = point
+            p.font.size = Pt(24)
+    
+    # Gründung und Name
+    add_content_slide("Gründung und Name", [
+        "Gründung: 11. Dezember 1948",
+        "Name: Freie Demokratische Partei (FDP)"
+    ])
+    
+    # Regierungsbeteiligung
+    add_content_slide("Regierungsbeteiligung", [
+        "Bund:",
+        "• Mehrfache Beteiligung an Bundesregierungen",
+        "• Aktuell: Ampel-Koalition seit 2021",
+        "Länder:",
+        "• Verschiedene Landesregierungen"
+    ])
+    
+    # Politische Ausrichtung
+    add_content_slide("Politische Ausrichtung", [
+        "• Liberal: Individuelle Freiheit und Eigenverantwortung",
+        "• Wirtschaftsliberal: Deregulierung und Steuersenkungen",
+        "• Bürgerlich-liberal",
+        "• Arbeitgeberfreundlich"
+    ])
+    
+    # Mitgliederzahlen
+    add_content_slide("Mitgliederzahlen", [
+        "• Aktuelle Mitgliederzahl: ca. 80.000 (Stand 2024)",
+        "• Schwankende Entwicklung",
+        "• Wiederanstieg nach 2013"
+    ])
+    
+    # Aktuelle Persönlichkeiten
+    add_content_slide("Aktuelle Persönlichkeiten", [
+        "• Christian Lindner (Parteivorsitzender)",
+        "• Bijan Djir-Sarai (Generalsekretär)",
+        "• Marco Buschmann (Bundesjustizminister)"
+    ])
+    
+    # Historische Persönlichkeiten
+    add_content_slide("Historische Persönlichkeiten", [
+        "• Walter Scheel (Bundespräsident)",
+        "• Hans-Dietrich Genscher (Bundesaußenminister)",
+        "• Theodor Heuss (Erster Bundespräsident)"
+    ])
+    
+    # Wahlprogramm 2025 - Wirtschaft
+    add_content_slide("Wahlprogramm 2025 - Wirtschaft", [
+        "• Steuersenkungen",
+        "• Bürokratieabbau",
+        "• Förderung von Innovationen",
+        "• Digitalisierung"
+    ])
+    
+    # Wahlprogramm 2025 - Bildung
+    add_content_slide("Wahlprogramm 2025 - Bildung", [
+        "• Stärkung der dualen Ausbildung",
+        "• Mehr Wettbewerb zwischen Bildungseinrichtungen",
+        "• Förderung von MINT-Fächern"
+    ])
+    
+    # Wahlprogramm 2025 - Soziales & Europa
+    add_content_slide("Wahlprogramm 2025 - Soziales & Europa", [
+        "• Flexibilisierung des Arbeitsmarktes",
+        "• Individuelle Vorsorgemöglichkeiten",
+        "• Stärkung des EU-Binnenmarktes",
+        "• Weniger EU-Bürokratie"
+    ])
+    
+    # Präsentation speichern
+    prs.save('FDP_Präsentation.pptx')
+
+if __name__ == '__main__':
+    create_fdp_presentation()
